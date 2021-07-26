@@ -1,0 +1,47 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+**/obj/
+**/bin/
+**/.idea
+**/.vscode
+**/node_modules
+**/FakesAssemblies/
+**/.vs
+**/TestResults
+*.feature.cs
+**/NuGet/lisez-moi.txt
+
+# User-specific files
+*.suo
+*.user
+*.vspscc
+**/UpgradeLog*.htm
+npm-debug.log
+yarn.lock
+yarn-error.log
+
+# Product-specific files
+/Sources/AF.Ose/AF.Ose.FrontOffice/coverage/
+/Sources/AF.Ose/AF.Ose.FrontOffice/Karma/results
+
+# Ose Nugets
+**/packages/*
+!**/packages/AF.Ose.*
+!**/packages/AF.Common.*
+!**/packages/AF.CustomSerialization.*
+!**/packages/AF.TestingTools.*
+
+# Nugets à migrer
+!**/packages/AF.Security.*
+!**/packages/Toolkit.Html.*
+!**/packages/AF.FWK.Web.Mvc.MonitoringViewer.*
+!**/packages/PfelConsumer.*
+/Sources/AF.Ose/packages/PfelConsumer.1.2.0
+**/AF.Ose/AF.Ose.FrontOffice/Content/css/products/
+**/AF.Ose/AF.Ose.FrontOffice/App/products/
+!**/AF.Ose/AF.Ose.FrontOffice/App/products/*.md
+
+# Vnext
+**/AF.Ose/AF.Ose.FrontOffice/vnext
