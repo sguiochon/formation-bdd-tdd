@@ -8,7 +8,7 @@ import java.math.BigInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("CurrencyUtils")
+@DisplayName("Tests Unitaires - CurrencyUtils")
 class CurrencyUtilsTest {
 
     @DisplayName("toUnit: doit retourner null quand input null")

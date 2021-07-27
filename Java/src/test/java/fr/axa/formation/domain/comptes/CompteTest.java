@@ -9,7 +9,7 @@ import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("Tests Unitaires de Compte")
+@DisplayName("Tests Unitaires - Compte")
 class CompteTest {
 
     @DisplayName("Deux comptes doivent être égaux quand ils ont le même ID")

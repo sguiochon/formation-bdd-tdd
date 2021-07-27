@@ -35,10 +35,9 @@ Feature: Virement interne
       And aucune opération n'est créée sur le compte numéro '00001'
       And aucune opération n'est créée sur le compte numéro '00002'
 
-
   Rule: RG3, RG9 - virement plafonné
     Example: plafond de 500€
-      Given mes virements sont plafonnés à 500€
+      Given mes virements sont plafonnés à 500.00€
       And j'ai 10000.00€ sur un "compte courant" numéro "00001"
       And j'ai 0.00€ sur un "Compte épargne" numéro "00002"
       When je vire 500.01€ de mon compte "00001" vers mon compte "00002"

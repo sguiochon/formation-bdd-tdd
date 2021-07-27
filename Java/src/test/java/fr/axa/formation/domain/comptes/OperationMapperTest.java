@@ -19,7 +19,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("OperationMapper")
+@DisplayName("Tests Unitaires - OperationMapper")
 @ExtendWith(SoftAssertionsExtension.class)
 class OperationMapperTest {
 

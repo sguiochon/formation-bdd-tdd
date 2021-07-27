@@ -12,7 +12,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DisplayName("CompteDao")
+@DisplayName("Tests Unitaires - CompteDao")
 @ExtendWith(SoftAssertionsExtension.class)
 class CompteDaoTest {
 

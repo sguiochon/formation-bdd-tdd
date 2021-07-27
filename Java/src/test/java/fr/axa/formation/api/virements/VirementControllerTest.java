@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-@DisplayName("Virement API")
+@DisplayName("Tests Unitaires - VirementController")
 @ExtendWith(MockitoExtension.class)
 class VirementControllerTest {
 

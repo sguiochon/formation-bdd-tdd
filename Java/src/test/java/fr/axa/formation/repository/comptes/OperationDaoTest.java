@@ -10,7 +10,7 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.Month;
 
-@DisplayName("OperationDao")
+@DisplayName("Tests Unitaires - OperationDao")
 @ExtendWith(SoftAssertionsExtension.class)
 class OperationDaoTest {
 
