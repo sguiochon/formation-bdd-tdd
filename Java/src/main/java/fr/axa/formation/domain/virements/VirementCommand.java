@@ -13,6 +13,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -35,9 +36,25 @@ public class VirementCommand implements AbstractCommand<VirementCommandRequest, 
 		String versCompteId = query.getVersCompte();
 
 		Optional<Compte> optionalCompteDepuis = getCompteQuery.execute(depuisCompteId);
+		Optional<Compte> optionalCompteVers = getCompteQuery.execute(versCompteId);
 
+		if (isMontantNegatif(query.getMontant())){
+			return VirementStatus.REJETE_MONTANT_NEGATIF;
+		}
+		if (!optionalCompteDepuis.isPresent()){
+			return VirementStatus.REJETE_COMPTE_SOURCE_INEXISTANT;
+		}
+		if (!optionalCompteVers.isPresent()){
+			return VirementStatus.REJETE_COMPTE_CIBLE_INEXISTANT;
+		}
+		if (Objects.equals(depuisCompteId, versCompteId)){
+			return VirementStatus.REJETE_COMPTES_SOURCE_ET_CIBLE_IDENTIQUES;
+		}
 		if (hasMontantLowerThan(optionalCompteDepuis.get(), query.getMontant())){
 			return VirementStatus.REJETE_SOLDE_INSUFFISANT;
+		}
+		if (isPlafondVirementReached(optionalCompteDepuis.get(), query.getMontant())){
+			return VirementStatus.REJETE_PLAFOND_VIREMENT_COMPTE_SOURCE_DEPASSE;
 		}
 
 		List<Operation> operationList = new ArrayList<>(2);
@@ -48,8 +65,16 @@ public class VirementCommand implements AbstractCommand<VirementCommandRequest, 
 		return VirementStatus.CONFIRME;
 	}
 
+	private static boolean isMontantNegatif(BigDecimal montant) {
+		return (montant != null) && (montant.compareTo(BigDecimal.ZERO) < 0);
+	}
+
 	public static boolean hasMontantLowerThan(Compte compte, BigDecimal amount){
 		return compte.getMontant().compareTo(amount) < 0;
+	}
+
+	public static boolean isPlafondVirementReached(Compte compte, BigDecimal amount){
+		return compte.hasPlafondVirement() && (compte.getPlafondVirement().compareTo(amount) < 0);
 	}
 
 }

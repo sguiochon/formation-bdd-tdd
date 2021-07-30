@@ -142,8 +142,7 @@ public class VirementStepdefs {
 
 	@Given("je n'ai pas de compte numéro {string}")
 	public void je_n_ai_pas_de_compte_numero(String compteId) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		// Je ne fais rien en fait...
 	}
 
 	@Then("le virement échoue et son statut est {string}")
@@ -163,8 +162,7 @@ public class VirementStepdefs {
 
 	@Given("mes virements sont plafonnés à {bigdecimal}€")
 	public void mes_virements_sont_plafonnes_a_Xeuros(BigDecimal montantPlafond) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		this.plafondVirement = montantPlafond.toBigInteger().multiply(BigInteger.valueOf(100));
 	}
 
 }
