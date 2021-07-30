@@ -39,6 +39,11 @@ public class VirementController implements VirementsApi {
 		// Appel du service VirementCommand
 		VirementStatus virementStatus = virementCommand.execute(virementCommandRequest);
 		// Réponse:
-		return ViewModelFactory.success(virementStatus.label());
+		if (virementStatus == VirementStatus.CONFIRME) {
+			return ViewModelFactory.success(virementStatus.label());
+		} else{
+			return ViewModelFactory.badRequest(virementStatus.label());
+		}
+
 	}
 }

@@ -24,8 +24,7 @@ Feature: Virement interne
       And une opération de débit de 500.00€ est créée sur le compte numéro "00001"
       And une opération de crédit de 500.00€ est créée sur le compte "00002"
 
-    @ignore
-    Rule: RG2, RG9 - virement hors provision
+  Rule: RG2, RG9 - virement hors provision
     Example: montant du transfert largement supérieur au solde du compte source
       Given j'ai 300.00€ sur un "Compte courant" numéro '00001'
       And j'ai 200.00€ sur un 'Livret épargne' numéro '00002'

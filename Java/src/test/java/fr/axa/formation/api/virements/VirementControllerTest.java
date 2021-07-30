@@ -2,6 +2,7 @@ package fr.axa.formation.api.virements;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.axa.formation.api.core.ControllerExceptionHandler;
+import fr.axa.formation.domain.errors.DomainException;
 import fr.axa.formation.domain.virements.VirementCommand;
 import fr.axa.formation.domain.virements.VirementStatus;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,6 +61,39 @@ class VirementControllerTest {
         final ResultActions resultActions = performPostVirement(virementRequest);
         // Assert
         resultActions.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+    }
+
+    @Test
+    void testPostReturnsCodeHttp400WhenVirementCommandReturnsVirementREJETESOLDEINSUFFISANT() throws Throwable {
+        // Arrange
+        String compteSourceId = "compte source ID";
+        String compteCibleId = "compte cile ID";
+        BigDecimal montant = BigDecimal.valueOf(50000, 2);
+        VirementRequest virementRequest = new VirementRequest(compteSourceId, compteCibleId, montant);
+
+        when(virementCommand.execute(any())).thenReturn(VirementStatus.REJETE_SOLDE_INSUFFISANT);
+
+        // Act
+        final ResultActions resultActions = performPostVirement(virementRequest);
+        // Assert
+        resultActions.andExpect(MockMvcResultMatchers.status().is4xxClientError());
+    }
+
+    @Test
+    void testPostReturnsCodeHttp500WhenVirementCommandThrowsDomainException() throws Throwable {
+        // Arrange
+        String compteSourceId = "compte source ID";
+        String compteCibleId = "compte cile ID";
+        BigDecimal montant = BigDecimal.valueOf(50000, 2);
+        VirementRequest virementRequest = new VirementRequest(compteSourceId, compteCibleId, montant);
+
+        String errorMessage = "errorMessage";
+        when(virementCommand.execute(any())).thenThrow(new DomainException(errorMessage));
+
+        // Act
+        final ResultActions resultActions = performPostVirement(virementRequest);
+        // Assert
+        resultActions.andExpect(MockMvcResultMatchers.status().is5xxServerError()).andExpect(MockMvcResultMatchers.jsonPath("$.message").value(errorMessage));
     }
 
     private ResultActions performPostVirement(final VirementRequest request) throws Throwable {

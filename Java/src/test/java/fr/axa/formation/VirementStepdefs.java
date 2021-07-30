@@ -147,15 +147,18 @@ public class VirementStepdefs {
 	}
 
 	@Then("le virement échoue et son statut est {string}")
-	public void le_virement_echoue_et_son_statut_est(String message) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+	public void le_virement_echoue_et_son_statut_est(String messageRejet) throws Exception {
+		performResult.andExpect(status().is4xxClientError()).andExpect(jsonPath("$.message").value(messageRejet));
 	}
 
 	@Then("aucune opération n'est créée sur le compte numéro {string}")
 	public void aucune_operation_n_est_creee_sur_le_compte_numero(String compteId) {
-		// Write code here that turns the phrase above into concrete actions
-		throw new io.cucumber.java.PendingException();
+		// Le test consiste à vérifier qu'il n'y a QU'UNE opération correspondant au versement initial:
+		Optional<CompteDao> optionalCompteDao = compteRepository.findById(compteId);
+		Assert.assertTrue("La vérification porte sur un compte préexistant", optionalCompteDao.isPresent());
+
+		Set<OperationDao> operations = optionalCompteDao.get().getOperations();
+		Assert.assertEquals("Le compte n'a pas d'autre opération que celle due à sa création", 1, operations.size());
 	}
 
 	@Given("mes virements sont plafonnés à {bigdecimal}€")
