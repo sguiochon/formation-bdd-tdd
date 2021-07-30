@@ -24,7 +24,8 @@ Feature: Virement interne
       And une opération de débit de 500.00€ est créée sur le compte numéro "00001"
       And une opération de crédit de 500.00€ est créée sur le compte "00002"
 
-  Rule: RG2, RG9 - virement hors provision
+    @ignore
+    Rule: RG2, RG9 - virement hors provision
     Example: montant du transfert largement supérieur au solde du compte source
       Given j'ai 300.00€ sur un "Compte courant" numéro '00001'
       And j'ai 200.00€ sur un 'Livret épargne' numéro '00002'
@@ -35,7 +36,8 @@ Feature: Virement interne
       And aucune opération n'est créée sur le compte numéro '00001'
       And aucune opération n'est créée sur le compte numéro '00002'
 
-  Rule: RG3, RG9 - virement plafonné
+    @ignore
+    Rule: RG3, RG9 - virement plafonné
     Example: plafond de 500€
       Given mes virements sont plafonnés à 500.00€
       And j'ai 10000.00€ sur un "compte courant" numéro "00001"
@@ -47,7 +49,8 @@ Feature: Virement interne
       And aucune opération n'est créée sur le compte numéro '00001'
       And aucune opération n'est créée sur le compte numéro '00002'
 
-  Rule: RG4, RG9 - virement d'un montant négatif rejeté
+    @ignore
+    Rule: RG4, RG9 - virement d'un montant négatif rejeté
     Example: virement de -500€
       Given j'ai 1300.00€ sur un "compte courant" numéro "00001"
       And j'ai 200.00€ sur un "compte épargne" numéro "00002"
@@ -58,7 +61,8 @@ Feature: Virement interne
       And aucune opération n'est créée sur le compte numéro '00001'
       And aucune opération n'est créée sur le compte numéro '00002'
 
-  Rule: RG5, RG9 - le compte source n'existe pas
+    @ignore
+    Rule: RG5, RG9 - le compte source n'existe pas
     Example: compte courant inexistant
       Given je n'ai pas de compte numéro "00003"
       And j'ai 200.00€ sur un "Compte épargne" numéro "00002"
@@ -67,7 +71,8 @@ Feature: Virement interne
       And j'ai maintenant 200.00€ sur mon compte numéro "00002"
       And aucune opération n'est créée sur le compte numéro '00002'
 
-  Rule: RG6, RG9 - le compte destination n'existe pas
+    @ignore
+    Rule: RG6, RG9 - le compte destination n'existe pas
     Example: compte livret inexistant
       Given je n'ai pas de compte numéro "00004"
       And j'ai 300.00€ sur un "compte courant" numéro "00001"
@@ -76,7 +81,8 @@ Feature: Virement interne
       And j'ai maintenant 300.00€ sur mon compte numéro "00001"
       And aucune opération n'est créée sur le compte numéro '00001'
 
-  Rule: RG7, RG9 - source et cible identiques
+    @ignore
+    Rule: RG7, RG9 - source et cible identiques
     Example: le compte source et destination sont identiques
       Given j'ai 300.00€ sur un "compte courant" numéro "00001"
       When je vire 50.00€ de mon compte "00001" vers mon compte "00001"

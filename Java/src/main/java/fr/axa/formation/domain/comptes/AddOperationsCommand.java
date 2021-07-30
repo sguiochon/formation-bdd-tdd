@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
-public class AddOperationsCommand extends AbstractCommand<List<Operation>, Boolean> {
+public class AddOperationsCommand implements AbstractCommand<List<Operation>, Boolean> {
 
     private final OperationRepository operationRepository;
     private final OperationMapper operationMapper;

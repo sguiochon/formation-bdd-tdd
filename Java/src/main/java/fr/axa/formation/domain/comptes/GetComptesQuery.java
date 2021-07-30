@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class GetComptesQuery extends AbstractQuery<Void, List<Compte>> {
+public class GetComptesQuery implements AbstractQuery<Void, List<Compte>> {
 
     private final CompteRepository compteRepository;
     private final CompteMapper mapper;

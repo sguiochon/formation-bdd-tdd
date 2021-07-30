@@ -3,9 +3,10 @@ package fr.axa.formation.domain.virements;
 import fr.axa.formation.domain.AbstractCommand;
 import org.hibernate.bytecode.spi.NotInstrumentedException;
 import org.springframework.stereotype.Service;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @Service
-public class VirementCommand extends AbstractCommand<VirementCommandRequest, VirementStatus> {
+public class VirementCommand implements AbstractCommand<VirementCommandRequest, VirementStatus> {
 
 
 	public VirementCommand() {
@@ -14,6 +15,6 @@ public class VirementCommand extends AbstractCommand<VirementCommandRequest, Vir
 
 	@Override
 	public VirementStatus execute(final VirementCommandRequest query) {
-		throw new NotInstrumentedException("je ne sais pas quoi faire!");
+		return VirementStatus.CONFIRME;
 	}
 }

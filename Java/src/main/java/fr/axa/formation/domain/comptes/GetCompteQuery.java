@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 import java.util.Optional;
 
 @Service
-public class GetCompteQuery extends AbstractQuery<String, Optional<Compte>> {
+public class GetCompteQuery implements AbstractQuery<String, Optional<Compte>> {
 
 	private final CompteRepository compteRepository;
 	private final CompteMapper mapper;
